@@ -16,15 +16,22 @@ class SalesController < ApplicationController
   end
 
   def create
-    @sale = Sale.new(sale_params)
+    # @sale = Sale.new(sale_params)
+    file_formats = ['.txt']
+    file = params[:sale][:file_data]
+
+    if file_formats.include? File.extname(file.filename)
+      @total_sales_cash = Sale.import(file)
+      flash.notice = "File imported."
+    else
+      flash.notice = "Can't import file."
+    end
 
     respond_to do |format|
       if @sale.save
-        format.html { redirect_to @sale, notice: 'Sale was successfully created.' }
-        format.json { render :show, status: :created, location: @sale }
+        format.html { redirect_to @sale, notice: 'File was successfully imported.' }
       else
         format.html { render :new }
-        format.json { render json: @sale.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,6 +62,6 @@ class SalesController < ApplicationController
     end
 
     def sale_params
-      params.require(:sale).permit(:buyer_id, :description, :price, :quantity, :supplier_id)
+      params.require(:sale).permit(:file_data)
     end
 end
