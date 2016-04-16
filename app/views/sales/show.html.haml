@@ -1,0 +1,19 @@
+%p#notice= notice
+%p
+  %strong Buyer:
+  = @sale.buyer
+%p
+  %strong Description:
+  = @sale.description
+%p
+  %strong Price:
+  = @sale.price
+%p
+  %strong Quantity:
+  = @sale.quantity
+%p
+  %strong Supplier:
+  = @sale.supplier
+= link_to 'Edit', edit_sale_path(@sale)
+|
+= link_to 'Back', sales_path
