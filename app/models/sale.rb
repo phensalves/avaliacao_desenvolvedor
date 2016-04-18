@@ -17,8 +17,4 @@ class Sale < ActiveRecord::Base
 
   	price * quantity if save
   end
-
-  def self.open_file(txt_file)
-
-  end
 end

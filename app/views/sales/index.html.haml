@@ -20,7 +20,7 @@
         %td= link_to 'Show', sale
         %td= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' }
 %h2 Import Products
-= form_tag import_sales_path, multipart: true do
+= form_tag sales_path, multipart: true do
   = file_field_tag :file
   = submit_tag "Import"
 

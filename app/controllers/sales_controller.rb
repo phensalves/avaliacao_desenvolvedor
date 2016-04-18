@@ -16,11 +16,10 @@ class SalesController < ApplicationController
   end
 
   def create
-    # @sale = Sale.new(sale_params)
     file_formats = ['.txt']
-    file = params[:sale][:file_data]
+    file = params[:file_data]
 
-    if file_formats.include? File.extname(file.filename)
+    if file_formats.include? File.extname(file.original_filename)
       @total_sales_cash = Sale.import(file)
       flash.notice = "File imported."
     else
