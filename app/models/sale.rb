@@ -10,11 +10,11 @@ class Sale < ActiveRecord::Base
   	row = row.split('\t')
     fail 'Wrong type!' if row.count != 6
 
-  	self.buyer = Buyer.find(row[0])
+  	self.buyer = Buyer.find_or_create name: row[0]
   	self.description = row[1]
   	self.price = row[2].to_f
   	self.quantity = row[3].to_i
-  	self.supplier = Supplier.find_supplier(row[5], row[4])
+  	self.supplier = Supplier.find_or_create name: row[5], addres: row[4]
 
   	save ? price * quantity : false
     end
