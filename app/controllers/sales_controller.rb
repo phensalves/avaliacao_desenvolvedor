@@ -5,14 +5,8 @@ class SalesController < ApplicationController
     @sales = Sale.all
   end
 
-  def show
-  end
-
   def new
     @sale = Sale.new
-  end
-
-  def edit
   end
 
   def create
@@ -31,18 +25,6 @@ class SalesController < ApplicationController
         format.html { redirect_to @sale, notice: 'File was successfully imported.' }
       else
         format.html { render :new }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @sale.update(sale_params)
-        format.html { redirect_to @sale, notice: 'Sale was successfully updated.' }
-        format.json { render :show, status: :ok, location: @sale }
-      else
-        format.html { render :edit }
-        format.json { render json: @sale.errors, status: :unprocessable_entity }
       end
     end
   end
