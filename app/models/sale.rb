@@ -16,10 +16,7 @@ class Sale < ActiveRecord::Base
   	self.quantity = row[3].to_i
   	self.supplier = Supplier.find_supplier(row[5], row[4])
 
-  	if save
-      price * quantity
-    else
-      false
+  	save ? price * quantity : false
     end
   end
 
